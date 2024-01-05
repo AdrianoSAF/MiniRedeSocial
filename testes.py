@@ -2,10 +2,10 @@ from comunidadeimpressionadora import app, database
 from comunidadeimpressionadora.models import Usuario, Post
 
 with app.app_context():
-    database.drop_all()
-        #Apaga tudo do banco de dado
-    database.create_all()
-        #Criando banco, tem que utilizar a ação dentro de um contexto.
+    # database.drop_all()
+    #     #Apaga tudo do banco de dado
+    # database.create_all()
+    #     #Criando banco, tem que utilizar a ação dentro de um contexto.
     
         #CRIANDO USUARIOS
     # usuario = Usuario(username= "adriano", email= "adriano20@gmail.com", senha="123123")
@@ -45,5 +45,5 @@ with app.app_context():
     # post = Post.query.all()
     # print("O autor do post é o: ", post[0].autor, "\n", f"O e-mail dele é: {post[0].autor.email}")
 
-    
+    pass
 
