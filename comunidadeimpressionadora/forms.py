@@ -23,12 +23,21 @@ class FormLogin(FlaskForm):
     lembrar_dados = BooleanField("Lembrar dados de Acesso")
     botao_submit_login = SubmitField("Fazer Login")
 
-    #atenção VALIDAR EMAIL E SENHA
+    #ATENÇÃO VALIDAR EMAIL E SENHA
 
 class FormEditarPerfil(FlaskForm):
     username = StringField("Nome de Usuário", validators=[DataRequired()])
     email = StringField("E-mail", validators=[DataRequired(), Email()])
     foto_perfil = FileField("Atualizar foto de perfil", validators=[FileAllowed(["jpg", "png"])])
+
+    curso_excel = BooleanField("Excel Impressionador")
+    curso_vba = BooleanField("VBA Impressionador")
+    curso_powerbi = BooleanField("PowerBi Impressionador")
+    curso_python = BooleanField("Python Impressionador")
+    curso_ppt = BooleanField("Apresentações Impressionadoras")
+    curso_sql = BooleanField("SQL Impressionador")
+    
+
     botao_submit_editarperfil = SubmitField("Confirmar edição")
     
     def validate_email(self, email):

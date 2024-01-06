@@ -3,7 +3,9 @@ from comunidadeimpressionadora import app, database, bcrypt
 from comunidadeimpressionadora.forms import FormCriarConta, FormLogin, FormEditarPerfil
 from comunidadeimpressionadora.models import Usuario
 from flask_login import login_user, logout_user, login_required, current_user
-
+import secrets
+import os
+from PIL import Image #biblioteca que compacta imagem# pip install pillow
 
 
 @app.route("/")
@@ -17,7 +19,7 @@ def contato():
 @app.route("/usuarios")
 @login_required
 def usuarios():
-    lista_usuarios = ['Lira', 'Alon', 'Alessandra', 'Amanda']
+    lista_usuarios = Usuario.query.all()
     return render_template("usuarios.html", lista_usuarios=lista_usuarios)
 
 
@@ -69,13 +71,44 @@ def perfil():
 def criar_post():
     return render_template("criarpost.html")
 
+def salvar_imagem(imagem):
+    #cria o código
+    codigo = secrets.token_hex(8)
+
+    #adiciona no nome do arquivo
+    nome, extensao = os.path.splitext(imagem.filename) #arquivo + extenção# Separar
+    nome_arquivo = nome + codigo + extensao #adicionando o token no nome da imagem
+    caminho_completo = os.path.join(app.root_path, "static/fotos_perfil", nome_arquivo) #caminho raiz do app
+
+    #reduz a imagem
+    tamanho_imagem = (200, 200)
+    imagem_reduzida = Image.open(imagem)
+    imagem_reduzida.thumbnail(tamanho_imagem) #reduz a imagem# THUMBNAIL significa miniatura
+
+    #salva a imagem
+    imagem_reduzida.save(caminho_completo)
+    return nome_arquivo
+
+def atualizar_cursos(form):
+    lista_cursos = []
+    for campo in form:
+        if "curso_" in campo.name:
+            if campo.data: #se True/ marcado
+                lista_cursos.append(campo.label.text)#texto do campo label
+    return ";".join(lista_cursos) #transforma uma lista em um texto separado por ;
+
+
 @app.route("/perfil/editar", methods=["GET", "POST"])
 @login_required
-def editar_perfil():
+def editar_perfil():#ATENÇÃO: quando um usuário novo que não tem curso atualiza alguma informação do perfil, a parte de cursos buga
     form = FormEditarPerfil()
     if form.validate_on_submit():#Method POST
         current_user.email = form.email.data
         current_user.username = form.username.data
+        if form.foto_perfil.data:
+            nome_imagem = salvar_imagem(form.foto_perfil.data)
+            current_user.foto_perfil = nome_imagem
+        current_user.cursos = atualizar_cursos(form)
         database.session.commit()
         flash("Perfil atualizado com sucesso", "alert-success")
         return redirect(url_for("perfil"))

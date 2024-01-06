@@ -25,12 +25,12 @@ with app.app_context():
     #                 #Query: para pegar algo do banco
     #                 #all: pega todas as informações da busca
     # print(f"Meus Usuários: {meus_usuarios}")
-    # primeiro_usuario = meus_usuarios[1]
+    # primeiro_usuario = meus_usuarios[0]
     # print(f"Primeiro usuário: {primeiro_usuario}")
     # print(Usuario.query.first())
 
     # #informações do usuário
-    # print(f"id do usuario: {primeiro_usuario.id}")
+    # print(f"id do usuario: {primeiro_usuario.cursos}")
     # print(f"id do usuario: {primeiro_usuario.senha}")
     # print(f"e-mail do usuário: {primeiro_usuario.email}")
     # print(f"Postes do primeiro usuário: {primeiro_usuario.posts}")
