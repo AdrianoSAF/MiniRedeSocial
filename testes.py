@@ -26,7 +26,7 @@ with app.app_context():
     #                 #all: pega todas as informações da busca
     # print(f"Meus Usuários: {meus_usuarios}")
     # primeiro_usuario = meus_usuarios[0]
-    # print(f"Primeiro usuário: {primeiro_usuario}")
+    # print(f"Primeiro usuário: {primeiro_usuario.posts[0].corpo}")
     # print(Usuario.query.first())
 
     # #informações do usuário

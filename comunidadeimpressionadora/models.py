@@ -19,6 +19,9 @@ class Usuario(database.Model, UserMixin):
                                 #laze = True: passa todas as informações do autor quando você buscar
     cursos = database.Column(database.String, nullable=False, default="Não informado")
 
+    def contar_posts(self):
+        return len(self.posts)
+
 class Post(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     titulo = database.Column(database.String, nullable=False)

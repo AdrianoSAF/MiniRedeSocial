@@ -2,6 +2,55 @@
 
 {% block body %}
 
-    <h1>Criar Post</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="POST" action="" class="border p-4 mt-2">
+                    {{ form.csrf_token }}
+                    <Legend>Criar Post</Legend>
+                    <fieldset>
+                        
+                        <div class="form-goup">
+                            {{ form.titulo.label(class="form-control-label") }}
 
+                            {% if form.titulo.errors %}
+                                {{ form.titulo(class="form-control is-invalid") }}
+
+                                <div class="invalid-feedback">
+                                    {%for error in form.titulo.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+
+                            {% else %}
+                                {{ form.titulo(class="form-control") }}
+                            {% endif%}
+                            
+                        </div>
+                        <div class="form-goup">
+                            {{ form.corpo.label(class="form-control-label") }}
+
+                            {% if form.corpo.errors %}
+                                {{ form.corpo(class="form-control is-invalid") }}
+
+                                <div class="invalid-feedback">
+                                    {%for error in form.corpo.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+
+                            {% else %}
+                                {{ form.corpo(class="form-control") }}
+                            {% endif%}
+                        </div>
+                    </fieldset>
+                    {{ form.botao_submit_post(class="btn btn-primary mt-2") }}
+                
+                </form>
+            </div>
+            
+        </div>
+    </div>
+
+    
 {% endblock %}
