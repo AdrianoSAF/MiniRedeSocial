@@ -9,7 +9,7 @@ from PIL import Image #biblioteca que compacta imagem# pip install pillow
 
 
 @app.route("/")
-def home():
+def home():#ATENÇÃO: tem que conter os posts do usuário mais os dos que ele segue
     posts = Post.query.order_by(Post.id.desc())
     return render_template("home.html", posts=posts)
 
@@ -33,7 +33,7 @@ def login():
         if usuario and bcrypt.check_password_hash(usuario.senha, form_login.senha.data):
             login_user(usuario, remember=form_login.lembrar_dados.data)
             flash(f"Login feito com sucesso no e-mail {form_login.email.data}", "alert-success")
-            par_next = request.args.get("next") #Pega o falor de um parametro específico da url
+            par_next = request.args.get("next") #Pega o valor de um parametro específico da url
                                                 #args: verifica os parametros da url
             if par_next:
                 return redirect(par_next) 

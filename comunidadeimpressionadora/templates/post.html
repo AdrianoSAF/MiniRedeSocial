@@ -84,7 +84,6 @@
                             </div>
                         </fieldset>
                         {{ form.botao_submit_post(class="btn btn-primary mt-2") }}
-                    
                     </form>
                 </div>
                 
@@ -97,21 +96,21 @@
     <!-- Modal -->
     <div class="modal fade" id="ExcluirPoste" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">excluir Post</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">excluir Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Você quer excluir o Post?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form method="POST" action="{{ url_for('excluir_post', post_id=post.id) }}">
+                        <button type="submit" class="btn btn-danger">Excluir Post</button>
+                    </form>
+                </div>
             </div>
-            <div class="modal-body">
-                Você quer excluir o Post?
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <form method="POST" action="{{ url_for('excluir_post', post_id=post.id) }}">
-                <button type="submit" class="btn btn-danger">Excluir Post</button>
-            </form>
-            </div>
-        </div>
         </div>
     </div>
 

@@ -7,7 +7,7 @@
         <hr>
         <div class="row">
             <div class="col">
-                <form method="POST", action="" class="border p-4 mt-2">
+                <form method="POST" action="" class="border p-4 mt-2">
                     {{ form_login.csrf_token }}
                     <Legend>Login</Legend>
                     <fieldset>
@@ -60,7 +60,7 @@
                 <form method="POST", action="" class="border p-4 mt-2" >
                     {{ form_criarconta.csrf_token }}
                     <Legend>Criar Conta</Legend>
-                    {{ csrf_token }}
+                    
                     <fieldset>
                         <div class="form-goup">
                             {{ form_criarconta.username.label(class="form-control-label") }}
